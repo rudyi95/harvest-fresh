@@ -1,3 +1,4 @@
 import { CBreadcrumbs } from "./Breadcrumbs";
+import { OrderButton } from "./OrderButton";
 
-export { CBreadcrumbs };
+export { CBreadcrumbs, OrderButton };

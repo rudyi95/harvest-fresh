@@ -21,7 +21,7 @@ import {
   shawarmaMix,
   shawarmaVeggie,
 } from "../assets";
-import { CBreadcrumbs } from "../components/common";
+import { CBreadcrumbs, OrderButton } from "../components/common";
 
 interface Product {
   id: string;
@@ -159,6 +159,7 @@ const ProductImage = ({
         justifyContent: "center",
       }}
     >
+      <OrderButton />
       {imageError ? (
         <Typography
           sx={{
