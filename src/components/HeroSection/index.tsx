@@ -9,7 +9,6 @@ const HeroSection = () => {
       id="home"
       sx={{
         position: "relative",
-        width: "100%",
         minHeight: {
           xs: "550px",
           sm: "650px",
