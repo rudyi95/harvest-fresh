@@ -13,6 +13,7 @@ import shawarmaChicken from "./products/shawarma/shawarmaChicken.jpeg";
 import shawarmaHawaiian from "./products/shawarma/shawarmaHawaiian.jpeg";
 import shawarmaMix from "./products/shawarma/shawarmaMix.jpeg";
 import shawarmaVeggie from "./products/shawarma/shawarmaVeggie.jpeg";
+import amishEggs from "./products/dairy/amishEggs.png";
 
 export {
   xo_logo,
@@ -30,4 +31,5 @@ export {
   shawarmaHawaiian,
   shawarmaMix,
   shawarmaVeggie,
+  amishEggs,
 };

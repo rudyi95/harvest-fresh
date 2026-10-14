@@ -2,6 +2,8 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 
 import { CBreadcrumbs } from "../components/common";
 
+import { amishEggs } from "../assets";
+
 interface SpecialProduct {
   id: number;
   name: string;
@@ -12,39 +14,9 @@ interface SpecialProduct {
 const products: SpecialProduct[] = [
   {
     id: 1,
-    name: "Swiss Cheese",
+    name: "Amish Eggs",
     discount: 10,
-    image: "/specials/cheese.jpg",
-  },
-  {
-    id: 2,
-    name: "Fresh Salmon",
-    discount: 10,
-    image: "/specials/salmon.jpg",
-  },
-  {
-    id: 3,
-    name: "Red Apples",
-    discount: 10,
-    image: "/specials/apples.jpg",
-  },
-  {
-    id: 4,
-    name: "Fresh Tomatoes",
-    discount: 10,
-    image: "/specials/tomatoes.jpg",
-  },
-  {
-    id: 5,
-    name: "Fresh Bread",
-    discount: 10,
-    image: "/specials/bread.jpg",
-  },
-  {
-    id: 6,
-    name: "Fresh Oranges",
-    discount: 10,
-    image: "/specials/oranges.jpg",
+    image: amishEggs,
   },
 ];
 
@@ -122,6 +94,35 @@ const WeeklySpecialsPage = () => {
                   },
                 }}
               >
+                {/* {imageError ? (
+                  <Typography
+                    sx={{
+                      fontSize: 14,
+                      color: "#999",
+                      textAlign: "center",
+                      p: 2,
+                    }}
+                  >
+                    {product.name}
+                  </Typography>
+                ) : (
+                  <Box
+                    component="img"
+                    src={product.image}
+                    alt={product.name}
+                    loading="lazy"
+                    onError={() => setImageError(true)}
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "fill",
+                      transition: "transform 0.4s ease",
+                      ".MuiCardActionArea-root:hover &": {
+                        transform: "scale(1.06)",
+                      },
+                    }}
+                  />
+                )} */}
                 <Box
                   sx={{
                     position: "relative",
@@ -139,24 +140,6 @@ const WeeklySpecialsPage = () => {
                       objectFit: "contain",
                     }}
                   />
-
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      top: 15,
-                      right: 15,
-                      backgroundColor: "#c62828",
-                      color: "#fff",
-                      px: 2,
-                      py: 1,
-                      borderRadius: 1,
-                      fontSize: 18,
-                      fontWeight: 700,
-                      boxShadow: "0 3px 10px rgba(0,0,0,0.15)",
-                    }}
-                  >
-                    -{product.discount}%
-                  </Box>
                 </Box>
 
                 <Box
