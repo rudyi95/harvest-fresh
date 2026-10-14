@@ -1,8 +1,10 @@
-import HeroSection from "../components/HeroSection";
-import AboutSection from "../components/AboutSection";
-import PopularSection from "../components/PopularSection";
-import ShawarmaSection from "../components/ShawarmaSection";
-import ContactUsSection from "../components/ContactUsSection";
+import {
+  HeroSection,
+  AboutSection,
+  PopularSection,
+  ShawarmaSection,
+  ContactUsSection,
+} from "src/components";
 
 const HomePage = () => {
   return (

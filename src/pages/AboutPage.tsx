@@ -1,9 +1,8 @@
 import { Box, Container, Typography } from "@mui/material";
 
-import chefImage from "../assets/aboutUs/vadik_ph.jpg";
-import storeImage from "../assets/aboutUs/storeInside.jpg";
+import { vadik_ph as chefImage, storeInside as storeImage } from "src/assets";
 
-import { CBreadcrumbs } from "../components/common";
+import { CBreadcrumbs } from "src/components/common";
 
 const AboutPage = () => {
   return (

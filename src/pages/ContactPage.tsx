@@ -18,7 +18,7 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
 import MailOutlineIcon from "@mui/icons-material/MailOutlined";
 
-import { CBreadcrumbs } from "../components/common";
+import { CBreadcrumbs } from "src/components/common";
 
 interface ContactForm {
   name: string;
