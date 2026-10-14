@@ -20,6 +20,24 @@ import amishEggs from "./products/dairy/amishEggs.png";
 
 import { storeInside, vadik_ph } from "./aboutUs";
 
+import cocaCola from "./products/beverage/cocaCola.jpeg";
+import cocaColaZero from "./products/beverage/cocaColaZero.jpeg";
+import compote from "./products/beverage/compote.jpeg";
+import fanta from "./products/beverage/fanta.jpeg";
+import sprite from "./products/beverage/sprite.jpeg";
+import water from "./products/beverage/water.jpeg";
+
+import americano from "./products/coffeeTea/americano.jpeg";
+import cappuccino from "./products/coffeeTea/cappuccino.jpeg";
+import coldBrewCoffee from "./products/coffeeTea/coldBrewCoffee.jpeg";
+import coldTea from "./products/coffeeTea/coldTea.jpeg";
+import espresso from "./products/coffeeTea/espresso.jpeg";
+import flatWhite from "./products/coffeeTea/flatWhite.jpeg";
+import hotLatte from "./products/coffeeTea/hotLatte.jpeg";
+import icedLatte from "./products/coffeeTea/icedLatte.jpeg";
+import macchiato from "./products/coffeeTea/macchiato.jpeg";
+import mocha from "./products/coffeeTea/mocha.jpeg";
+
 export {
   xo_logo,
   hero_bg,
@@ -39,4 +57,20 @@ export {
   amishEggs,
   storeInside,
   vadik_ph,
+  cocaCola,
+  cocaColaZero,
+  compote,
+  fanta,
+  sprite,
+  water,
+  americano,
+  cappuccino,
+  coldBrewCoffee,
+  coldTea,
+  espresso,
+  flatWhite,
+  hotLatte,
+  icedLatte,
+  macchiato,
+  mocha,
 };

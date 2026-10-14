@@ -105,7 +105,7 @@ const pages = [
   // { label: "Departments", path: "/departments" },
   { label: "Weekly Specials", path: "/weekly-specials" },
   { label: "Shawarma", path: "/shawarma" },
-  { label: "Catering", path: "/catering" },
+  // { label: "Catering", path: "/catering" },
   { label: "Contact Us", path: "/contacts" },
 ];
 
