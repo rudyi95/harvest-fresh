@@ -106,9 +106,13 @@ const AboutSection = () => {
               width: "100%",
               height: {
                 xs: 280,
+                sm: 400,
                 md: 400,
               },
-              objectFit: "cover",
+              objectFit: {
+                xs: "cover",
+                md: "contain",
+              },
               borderRadius: "8px",
               display: "block",
             }}
