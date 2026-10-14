@@ -11,9 +11,12 @@ import {
   DialogContent,
   IconButton,
   Stack,
+  Button,
 } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+
 import {
   shawarmaBeef,
   shawarmaChicken,
@@ -27,6 +30,7 @@ interface Product {
   id: string;
   name: string;
   image: string;
+  orderUrl: string;
   description: string;
 }
 
@@ -45,6 +49,8 @@ const categories: ProductCategory[] = [
         id: "chicken",
         name: "Chicken Shawarma",
         image: shawarmaChicken,
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/chicken-shawarma-7BW9Z8P63FHRE?menu=RegularHours",
         description:
           "Ingredients: chicken, lavash or pita bread, cabbage, tomatoes, cucumbers, carrots, onions.",
       },
@@ -52,6 +58,8 @@ const categories: ProductCategory[] = [
         id: "beef",
         name: "Beef Shawarma",
         image: shawarmaBeef,
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/beef-shawarma-X3S8CMX18VNJR?menu=RegularHours",
         description:
           "Ingredients: beef, lavash or pita bread, cabbage, tomatoes, cucumbers, carrots, onions.",
       },
@@ -59,6 +67,8 @@ const categories: ProductCategory[] = [
         id: "mix",
         name: "Mix Shawarma",
         image: shawarmaMix,
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/mix-shawarmabeefchicken-S6J04PNCYP058?menu=RegularHours",
         description:
           "Ingredients: French fries, grilled chicken or tender beef, cabbage and fresh vegetables.",
       },
@@ -66,6 +76,8 @@ const categories: ProductCategory[] = [
         id: "veggie",
         name: "Veggie Shawarma",
         image: shawarmaVeggie,
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/veggie-shawarma-TVVPY542Y45QE?menu=RegularHours",
         description:
           "Ingredients: French fries, grilled chicken or tender beef, cabbage and fresh vegetables.",
       },
@@ -73,6 +85,8 @@ const categories: ProductCategory[] = [
         id: "hawaiian",
         name: "Hawaiian Shawarma",
         image: shawarmaHawaiian,
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/hawaiian-shawarma-KDZVDNDM9P868?menu=RegularHours",
         description:
           "Ingredients: French fries, grilled chicken or tender beef, cabbage and fresh vegetables.",
       },
@@ -85,36 +99,42 @@ const categories: ProductCategory[] = [
         id: "compote",
         name: "Compote (16 oz)",
         image: imagePath("compote.jpg"),
+        orderUrl: "",
         description: "Ingredients: water, sugar, and a mix of berries.",
       },
       {
         id: "water",
         name: "Spring Water (16 oz)",
         image: imagePath("water.jpg"),
+        orderUrl: "",
         description: "Refreshing bottled spring water.",
       },
       {
         id: "cola",
         name: "Coca-Cola (20 oz - 12 oz)",
         image: imagePath("coca-cola.jpg"),
+        orderUrl: "",
         description: "Classic Coca-Cola soft drink.",
       },
       {
         id: "sprite",
         name: "Sprite (20 oz - 12 oz)",
         image: imagePath("sprite.jpg"),
+        orderUrl: "",
         description: "Refreshing lemon-lime soda.",
       },
       {
         id: "fanta",
         name: "Fanta (20 oz - 12 oz)",
         image: imagePath("fanta.jpg"),
+        orderUrl: "",
         description: "Orange-flavored carbonated soft drink.",
       },
       {
         id: "juice",
         name: "Juices (10 oz)",
         image: imagePath("juice.jpg"),
+        orderUrl: "",
         description: "Orange, Apple, Tomato and Multivitamin juices.",
       },
     ],
@@ -126,12 +146,14 @@ const categories: ProductCategory[] = [
         id: "tea",
         name: "Tea (16 oz)",
         image: imagePath("tea.jpg"),
+        orderUrl: "",
         description: "Green, Black and Herbal tea.",
       },
       {
         id: "coffee",
         name: "Coffee (16 oz)",
         image: imagePath("coffee.jpg"),
+        orderUrl: "",
         description: "Freshly brewed regular or decaf coffee.",
       },
     ],
@@ -159,7 +181,6 @@ const ProductImage = ({
         justifyContent: "center",
       }}
     >
-      <OrderButton />
       {imageError ? (
         <Typography
           sx={{
@@ -221,6 +242,8 @@ const ShawarmaPage = () => {
       >
         <CBreadcrumbs page="Shawarma" />
       </Box>
+
+      <OrderButton />
 
       {/* Product Sections */}
 
@@ -404,6 +427,35 @@ const ShawarmaPage = () => {
                   >
                     {selectedProduct.description}
                   </Typography>
+
+                  {selectedProduct?.orderUrl && (
+                    <Button
+                      component="a"
+                      href={selectedProduct.orderUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="contained"
+                      endIcon={<OpenInNewIcon />}
+                      sx={{
+                        mt: 3,
+                        px: 4,
+                        py: 1.5,
+                        backgroundColor: "#874747",
+                        color: "#fff",
+                        fontSize: 14,
+                        fontWeight: 600,
+                        textTransform: "none",
+                        borderRadius: "8px",
+                        boxShadow: "none",
+                        "&:hover": {
+                          backgroundColor: "#6d3535",
+                          boxShadow: "none",
+                        },
+                      }}
+                    >
+                      Make an Order
+                    </Button>
+                  )}
                 </Stack>
               </Box>
             </Box>
