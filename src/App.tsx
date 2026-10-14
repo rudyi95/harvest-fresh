@@ -8,7 +8,8 @@ import ContactPage from "./pages/ContactPage";
 import WeeklySpecialsPage from "./pages/WeeklySpecialsPage";
 
 const App = () => {
-  return (
+  
+    return (
     <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
