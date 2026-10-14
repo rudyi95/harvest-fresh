@@ -287,7 +287,7 @@ const ShawarmaPage = () => {
                       p: 1.5,
                     }}
                   >
-                    <ProductImage product={product} height={210} />
+                    <ProductImage product={product} height="auto" />
 
                     <CardContent
                       sx={{

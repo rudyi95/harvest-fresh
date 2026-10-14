@@ -88,7 +88,7 @@ const AboutPage = () => {
                 display: "block",
                 mx: "auto",
                 borderRadius: "5px",
-                objectFit: "cover",
+                objectFit: "contain",
               }}
             />
 
@@ -132,6 +132,10 @@ const AboutPage = () => {
               height: { xs: 280, md: 360 },
               objectFit: "cover",
               borderRadius: "6px",
+              order: {
+                xs: 1,
+                md: 0,
+              },
             }}
           />
 
