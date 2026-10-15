@@ -17,6 +17,8 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
+import { CategoryNavigation } from "src/components/common";
+
 import {
   shawarmaBeef,
   shawarmaChicken,
@@ -52,12 +54,14 @@ interface Product {
 }
 
 interface ProductCategory {
+  id: string;
   title: string;
   products: Product[];
 }
 
 const categories: ProductCategory[] = [
   {
+    id: "shawarma",
     title: "Shawarma",
     products: [
       {
@@ -108,127 +112,151 @@ const categories: ProductCategory[] = [
     ],
   },
   {
+    id: "beverages",
     title: "Beverages",
     products: [
       {
         id: "compote",
         name: "Compote (16 oz)",
         image: compote,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/compote-NBBZJYXV3265M?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/compote-NBBZJYXV3265M?menu=RegularHours",
         description: "Ingredients: water, sugar, and a mix of berries.",
       },
       {
         id: "water",
         name: "Spring Water (16 oz)",
         image: water,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/water-RF46Y7ARSB9YW?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/water-RF46Y7ARSB9YW?menu=RegularHours",
         description: "Refreshing bottled spring water.",
       },
       {
         id: "cola",
         name: "Coca-Cola (20 oz - 12 oz)",
         image: cocaCola,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/coca-cola-8175XK19F3CZ8?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/coca-cola-8175XK19F3CZ8?menu=RegularHours",
         description: "Classic Coca-Cola soft drink.",
       },
       {
         id: "sprite",
         name: "Sprite (20 oz - 12 oz)",
         image: sprite,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/sprite-F0DFRT8FJ0Z94?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/sprite-F0DFRT8FJ0Z94?menu=RegularHours",
         description: "Refreshing lemon-lime soda.",
       },
       {
         id: "fanta",
         name: "Fanta (20 oz - 12 oz)",
         image: fanta,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/fanta-G9K9Z2D1Q6FQ0?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/fanta-G9K9Z2D1Q6FQ0?menu=RegularHours",
         description: "Orange-flavored carbonated soft drink.",
       },
       {
         id: "cocaColaZero",
         name: "Coca-Cola Zero (10 oz)",
         image: cocaColaZero,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/coca-zero-sugar-766ZP5ARTCE6G?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/coca-zero-sugar-766ZP5ARTCE6G?menu=RegularHours",
         description: "Coca-Cola Zero soft drink.",
       },
     ],
   },
   {
+    id: "coffee",
     title: "Coffee & Tea",
     products: [
       {
         id: "coldTea",
         name: "Cold Tea",
         image: coldTea,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/cold-tea-34RA9RWFS2ZHP?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/cold-tea-34RA9RWFS2ZHP?menu=RegularHours",
         description: "Green, Black and Herbal tea.",
       },
       {
         id: "americano",
         name: "Americano",
         image: americano,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/americano-12-oz-VVEHPKJM8W4DA?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/americano-12-oz-VVEHPKJM8W4DA?menu=RegularHours",
         description: "",
       },
       {
         id: "cappuccino",
         name: "Cappuccino",
         image: cappuccino,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/capuccino-12-oz-BY2SCTVHH40VC?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/capuccino-12-oz-BY2SCTVHH40VC?menu=RegularHours",
         description: "",
       },
       {
         id: "coldBrewCoffee",
         name: "Cold Brew Coffee",
         image: coldBrewCoffee,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/cold-brew-coffee-16-oz-WF4Q7M60YETYW?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/cold-brew-coffee-16-oz-WF4Q7M60YETYW?menu=RegularHours",
         description: "",
       },
       {
         id: "espresso",
         name: "Espresso",
         image: espresso,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/espresso-4-oz-KMVP21JTC4MR0?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/espresso-4-oz-KMVP21JTC4MR0?menu=RegularHours",
         description: "",
       },
       {
         id: "flatWhite",
         name: "Flat White",
         image: flatWhite,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/flat-white-1Q5MY16KBD3YY?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/flat-white-1Q5MY16KBD3YY?menu=RegularHours",
         description: "",
       },
       {
         id: "hotLatte",
         name: "Hot Latte",
         image: hotLatte,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/latte-12-oz-F80PW6504MGX4?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/latte-12-oz-F80PW6504MGX4?menu=RegularHours",
         description: "",
       },
       {
         id: "icedLatte",
         name: "Iced Latte",
         image: icedLatte,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/ice-latte-0E2KE1NDA0EDG?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/ice-latte-0E2KE1NDA0EDG?menu=RegularHours",
         description: "",
       },
       {
         id: "macchiato",
         name: "Macchiato",
         image: macchiato,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/macchiato-12-oz-F3JHYDK7CY06C?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/macchiato-12-oz-F3JHYDK7CY06C?menu=RegularHours",
         description: "",
       },
       {
         id: "mocha",
         name: "Mocha",
         image: mocha,
-        orderUrl: "https://harvest-fresh-xo-deli.cloveronline.com/menu/mocha-12-oz-Z90BYYTN9DXKY?menu=RegularHours",
+        orderUrl:
+          "https://harvest-fresh-xo-deli.cloveronline.com/menu/mocha-12-oz-Z90BYYTN9DXKY?menu=RegularHours",
         description: "",
       },
     ],
   },
+];
+
+const shawarmaCategories = [
+  { id: "shawarma", label: "Shawarma" },
+  { id: "beverages", label: "Beverages" },
+  { id: "coffee", label: "Coffee" },
 ];
 
 const ProductImage = ({
@@ -316,6 +344,8 @@ const ShawarmaPage = () => {
 
       <OrderButton />
 
+      <CategoryNavigation categories={shawarmaCategories} />
+
       {/* Product Sections */}
 
       <Container
@@ -326,6 +356,7 @@ const ShawarmaPage = () => {
       >
         {categories.map((category) => (
           <Box
+            id={category.id}
             key={category.title}
             sx={{
               mb: { xs: 7, md: 10 },

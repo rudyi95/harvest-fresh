@@ -129,7 +129,7 @@ const Header = () => {
   return (
     <>
       <AppBar
-        position="sticky"
+        position='relative'
         elevation={0}
         sx={{
           backgroundColor: "#fff",
