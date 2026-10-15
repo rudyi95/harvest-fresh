@@ -90,22 +90,6 @@ const AboutPage = () => {
                 objectFit: "contain",
               }}
             />
-
-            <Typography
-              sx={{
-                mt: 1.5,
-                fontSize: { xs: 20, md: 24 },
-                fontWeight: 700,
-                fontStyle: "italic",
-                color: "#222",
-                lineHeight: 1.1,
-                transform: "rotate(-3deg)",
-              }}
-            >
-              Bringing the Farm
-              <br />
-              to Your Table.
-            </Typography>
           </Box>
         </Box>
 
