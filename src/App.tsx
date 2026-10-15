@@ -6,10 +6,11 @@ import AboutPage from "./pages/AboutPage";
 import ShawarmaPage from "./pages/ShawarmaPage";
 import ContactPage from "./pages/ContactPage";
 import WeeklySpecialsPage from "./pages/WeeklySpecialsPage";
+import NotFound from "src/pages/NotFound";
+import ServerError from "src/pages/ServerError";
 
 const App = () => {
-  
-    return (
+  return (
     <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
@@ -17,6 +18,8 @@ const App = () => {
         <Route path="/weekly-specials" element={<WeeklySpecialsPage />} />
         <Route path="/shawarma" element={<ShawarmaPage />} />
         <Route path="/contacts" element={<ContactPage />} />
+        <Route path="/500" element={<ServerError />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

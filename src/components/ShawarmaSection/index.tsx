@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
-import shawarmaImage from "../../assets/ChefSlicingShawarma.png";
+import shawarmaImage from "src/assets/chefSlicingShawarma.png";
 
 const ShawarmaSection = () => {
   return (
