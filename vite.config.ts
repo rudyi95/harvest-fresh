@@ -4,7 +4,6 @@ import path from "node:path";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/harvest-fresh/",
   resolve: {
     alias: {
       src: path.resolve(__dirname, "./src"),
