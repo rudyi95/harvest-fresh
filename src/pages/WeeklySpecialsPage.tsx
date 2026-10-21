@@ -29,7 +29,7 @@ const WeeklySpecialsPage = () => {
           py: 2,
         }}
       >
-        <CBreadcrumbs page="Weekly Specials" />
+        <CBreadcrumbs page="Holiday Menu" />
       </Box>
 
       <Container
@@ -49,7 +49,7 @@ const WeeklySpecialsPage = () => {
               color: "#222",
             }}
           >
-            Weekly Specials
+            Holiday Menu
           </Typography>
 
           <Typography
