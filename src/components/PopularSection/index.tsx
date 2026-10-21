@@ -1,6 +1,7 @@
 import { Box, Container, Typography } from "@mui/material";
 
 import { deli, bakery, vegetables, meat, fish, fruits } from "../../assets";
+import { popularSection } from "src/utils/constants/text/home";
 
 const departments = [
   { title: "DELI", image: deli, slug: "deli" },
@@ -50,10 +51,7 @@ const PopularSection = () => {
               lineHeight: 1.8,
             }}
           >
-            Explore the freshest selection across all our departments, thoughtfully curated to bring
-            quality, taste, and value together. Each section is designed to make shopping feel
-            simple, vibrant, and full of flavor. Whether you're picking up fresh produce, browsing
-            deli favorites, or selecting a ready-to-go meal, you'll find quality in every corner.
+            {popularSection}
           </Typography>
         </Box>
 

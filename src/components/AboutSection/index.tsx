@@ -2,13 +2,8 @@ import { Box, Container, Typography, Stack } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 import { about } from "../../assets";
-
-const features = [
-  "Freshly prepared foods and thoughtfully stocked shelves",
-  "Committed to quality, customer care, and clean spaces",
-  "A one-stop shop for grocery, meals, health, and home",
-  "Warm atmosphere and service that feels like family",
-];
+import { aboutSection } from "src/utils/constants/text/home";
+import { CustomPicture } from "../common/CustomPicture";
 
 const AboutSection = () => {
   return (
@@ -58,17 +53,12 @@ const AboutSection = () => {
                 mb: 3,
               }}
             >
-              At XO Harvest Fresh, we believe grocery shopping should feel personal, vibrant, and
-              fulfilling. Here we've created a place where quality matters, service is friendly, and
-              every department brings you something fresh, useful, and unexpected. From our deli
-              counter and prepared meals to everyday staples and unique imports, our goal is to make
-              your visit feel like a discovery. We take pride in offering a wide range of essentials
-              while focusing on freshness, cleanliness, and comfort.
+              {aboutSection.text}
             </Typography>
 
             {/* Features */}
             <Stack spacing={1.5}>
-              {features.map((feature, index) => (
+              {aboutSection.list.map((feature, index) => (
                 <Box
                   key={index}
                   sx={{
@@ -98,25 +88,7 @@ const AboutSection = () => {
           </Box>
 
           {/* Right Image */}
-          <Box
-            component="img"
-            src={about}
-            alt="XO Harvest Fresh Store"
-            sx={{
-              width: "100%",
-              height: {
-                xs: 280,
-                sm: 400,
-                md: 400,
-              },
-              objectFit: {
-                xs: "cover",
-                md: "contain",
-              },
-              borderRadius: "8px",
-              display: "block",
-            }}
-          />
+          <CustomPicture src={about} alt="XO Harvest Fresh Store" />
         </Box>
       </Container>
     </Box>

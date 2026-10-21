@@ -103,7 +103,7 @@ const pages = [
   { label: "Home", path: "/" },
   { label: "About Us", path: "/about" },
   // { label: "Departments", path: "/departments" },
-  { label: "Weekly Specials", path: "/weekly-specials" },
+  { label: "Holiday Menu", path: "/weekly-specials" },
   { label: "Shawarma", path: "/shawarma" },
   // { label: "Catering", path: "/catering" },
   { label: "Contact Us", path: "/contacts" },
@@ -129,7 +129,7 @@ const Header = () => {
   return (
     <>
       <AppBar
-        position='relative'
+        position="relative"
         elevation={0}
         sx={{
           backgroundColor: "#fff",
