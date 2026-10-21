@@ -4,9 +4,6 @@ import {
   Box,
   Container,
   Typography,
-  Card,
-  CardActionArea,
-  CardContent,
   Dialog,
   DialogContent,
   IconButton,
@@ -44,6 +41,8 @@ import {
 } from "../assets";
 
 import { CBreadcrumbs, OrderButton } from "../components/common";
+import { ItemCard } from "src/components/common/ItemCard";
+import type { Nullable } from "src/types/common";
 
 interface Product {
   id: string;
@@ -316,13 +315,15 @@ const ProductImage = ({
 const ShawarmaPage = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  const handleOpen = (product: Product) => {
-    setSelectedProduct(product);
-  };
+  const handleAction = (product: Nullable<Product>) =>
+    setSelectedProduct(!selectedProduct ? product : null);
+  // const handleOpen = (product: Product) => {
+  //   setSelectedProduct(product);
+  // };
 
-  const handleClose = () => {
-    setSelectedProduct(null);
-  };
+  // const handleClose = () => {
+  //   setSelectedProduct(null);
+  // };
 
   return (
     <Box
@@ -389,51 +390,7 @@ const ShawarmaPage = () => {
               }}
             >
               {category.products.map((product) => (
-                <Card
-                  key={product.id}
-                  elevation={0}
-                  sx={{
-                    border: "1px solid #f1f1f1",
-                    borderRadius: "6px",
-                    backgroundColor: "#fff",
-                    transition: "box-shadow 0.3s ease",
-                    "&:hover": {
-                      boxShadow: "0 8px 24px rgba(0,0,0,0.07)",
-                    },
-                  }}
-                >
-                  <CardActionArea
-                    onClick={() => handleOpen(product)}
-                    sx={{
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "stretch",
-                      justifyContent: "flex-start",
-                      p: 1.5,
-                    }}
-                  >
-                    <ProductImage product={product} height="auto" />
-
-                    <CardContent
-                      sx={{
-                        px: 0.5,
-                        pt: 2,
-                        pb: 2,
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          fontSize: 16,
-                          fontWeight: 500,
-                          mb: 1,
-                        }}
-                      >
-                        {product.name}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
+                <ItemCard product={product} handleAction={handleAction} />
               ))}
             </Box>
           </Box>
@@ -444,7 +401,7 @@ const ShawarmaPage = () => {
 
       <Dialog
         open={Boolean(selectedProduct)}
-        onClose={handleClose}
+        onClose={() => handleAction(null)}
         maxWidth="md"
         fullWidth
         aria-labelledby="product-dialog-title"
@@ -459,7 +416,7 @@ const ShawarmaPage = () => {
         }}
       >
         <IconButton
-          onClick={handleClose}
+          onClick={() => handleAction(null)}
           aria-label="Close product details"
           sx={{
             position: "absolute",

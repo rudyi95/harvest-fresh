@@ -1,24 +1,28 @@
-import { useState } from "react";
-import type { ChangeEvent, FormEvent } from "react";
+import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 
 import {
+  Alert,
   Box,
+  Button,
+  Checkbox,
+  CircularProgress,
   Container,
-  Typography,
+  FormControlLabel,
   Link,
   Stack,
   TextField,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Alert,
+  Typography,
 } from "@mui/material";
 
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
 import MailOutlineIcon from "@mui/icons-material/MailOutlined";
 
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+
 import { CBreadcrumbs } from "src/components/common";
+
+const HCAPTCHA_SITE_KEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
 
 interface ContactForm {
   name: string;
@@ -29,17 +33,25 @@ interface ContactForm {
   subscribe: boolean;
 }
 
-const ContactPage = () => {
-  const [form, setForm] = useState<ContactForm>({
-    name: "",
-    phone: "",
-    email: "",
-    address: "",
-    message: "",
-    subscribe: true,
-  });
+type FormStatus = "success" | "error" | null;
 
-  const [submitted, setSubmitted] = useState(false);
+const initialForm: ContactForm = {
+  name: "",
+  phone: "",
+  email: "",
+  address: "",
+  message: "",
+  subscribe: false,
+};
+
+const ContactPage = () => {
+  const [form, setForm] = useState<ContactForm>({ ...initialForm });
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<FormStatus>(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+
+  const captchaRef = useRef<HCaptcha>(null);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -48,15 +60,84 @@ const ContactPage = () => {
       ...prev,
       [name]: value,
     }));
+
+    if (status !== null) {
+      setStatus(null);
+    }
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const resetCaptcha = () => {
+    setCaptchaToken(null);
+    captchaRef.current?.resetCaptcha();
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // TODO: Connect to backend API
-    console.log("Contact form:", form);
+    if (loading) {
+      return;
+    }
 
-    setSubmitted(true);
+    if (!captchaToken) {
+      setErrorMessage("Please complete the CAPTCHA verification.");
+      setStatus("error");
+      return;
+    }
+
+    setLoading(true);
+    setStatus(null);
+    setErrorMessage("");
+
+    try {
+      const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+
+      if (!accessKey) {
+        throw new Error("Web3Forms access key is missing.");
+      }
+
+      const payload = {
+        access_key: accessKey,
+        subject: "New Contact Us Message - Harvest Fresh",
+        from_name: "Harvest Fresh Website",
+        name: form.name.trim(),
+        phone: form.phone.trim(),
+        email: form.email.trim(),
+        address: form.address.trim(),
+        message: form.message.trim(),
+        newsletter_subscription: form.subscribe ? "Yes" : "No",
+        "h-captcha-response": captchaToken,
+      };
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Failed to send your message.");
+      }
+
+      setForm({ ...initialForm });
+      setStatus("success");
+      resetCaptcha();
+    } catch (error) {
+      console.error("Web3Forms submission error:", error);
+
+      setErrorMessage(
+        error instanceof Error ? error.message : "Something went wrong. Please try again.",
+      );
+
+      setStatus("error");
+      resetCaptcha();
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputStyle = {
@@ -71,8 +152,12 @@ const ContactPage = () => {
   };
 
   return (
-    <Box sx={{ backgroundColor: "#fff" }}>
-      {/* Breadcrumb */}
+    <Box
+      sx={{
+        backgroundColor: "#fff",
+      }}
+    >
+      {/* BREADCRUMBS */}
       <Box
         sx={{
           borderBottom: "1px solid #f1f1f1",
@@ -82,7 +167,7 @@ const ContactPage = () => {
         <CBreadcrumbs page="Contact Us" />
       </Box>
 
-      {/* Contact section */}
+      {/* CONTACT SECTION */}
       <Container
         maxWidth="md"
         sx={{
@@ -101,7 +186,7 @@ const ContactPage = () => {
             gap: { xs: 5, md: 7 },
           }}
         >
-          {/* Left column */}
+          {/* LEFT COLUMN */}
           <Box>
             <Typography
               component="h1"
@@ -128,13 +213,13 @@ const ContactPage = () => {
             </Typography>
 
             <Stack spacing={3}>
-              {/* Address */}
+              {/* ADDRESS */}
               <Stack
+                direction="row"
+                spacing={1.5}
                 sx={{
                   alignItems: "flex-start",
                 }}
-                direction="row"
-                spacing={1.5}
               >
                 <LocationOnOutlinedIcon
                   sx={{
@@ -159,7 +244,7 @@ const ContactPage = () => {
                     sx={{
                       fontSize: "13px",
                       color: "#555",
-                      lineHeight: "1.7",
+                      lineHeight: 1.7,
                     }}
                   >
                     100 East Rand Rd,
@@ -169,7 +254,7 @@ const ContactPage = () => {
                 </Box>
               </Stack>
 
-              {/* Phone */}
+              {/* PHONE */}
               <Stack
                 direction="row"
                 spacing={1.5}
@@ -208,7 +293,7 @@ const ContactPage = () => {
                 </Box>
               </Stack>
 
-              {/* Email */}
+              {/* EMAIL */}
               <Stack
                 direction="row"
                 spacing={1.5}
@@ -250,7 +335,7 @@ const ContactPage = () => {
             </Stack>
           </Box>
 
-          {/* Right column */}
+          {/* RIGHT COLUMN */}
           <Box>
             <Typography
               component="h2"
@@ -264,12 +349,21 @@ const ContactPage = () => {
               Drop Us a Line
             </Typography>
 
-            {submitted && (
-              <Alert severity="info" sx={{ mb: 2 }} onClose={() => setSubmitted(false)}>
-                Form validated. Backend submission is not connected yet.
+            {/* SUCCESS MESSAGE */}
+            {status === "success" && (
+              <Alert severity="success" sx={{ mb: 2 }} onClose={() => setStatus(null)}>
+                Thank you! Your message has been sent successfully. We'll get back to you shortly.
               </Alert>
             )}
 
+            {/* ERROR MESSAGE */}
+            {status === "error" && (
+              <Alert severity="error" sx={{ mb: 2 }} onClose={() => setStatus(null)}>
+                {errorMessage}
+              </Alert>
+            )}
+
+            {/* CONTACT FORM */}
             <Box component="form" onSubmit={handleSubmit}>
               <Box
                 sx={{
@@ -281,6 +375,7 @@ const ContactPage = () => {
                   gap: 2,
                 }}
               >
+                {/* NAME */}
                 <TextField
                   name="name"
                   placeholder="Name *"
@@ -289,9 +384,11 @@ const ContactPage = () => {
                   required
                   fullWidth
                   size="small"
+                  disabled={loading}
                   sx={inputStyle}
                 />
 
+                {/* PHONE */}
                 <TextField
                   name="phone"
                   placeholder="Phone Number *"
@@ -301,9 +398,11 @@ const ContactPage = () => {
                   required
                   fullWidth
                   size="small"
+                  disabled={loading}
                   sx={inputStyle}
                 />
 
+                {/* EMAIL */}
                 <TextField
                   name="email"
                   placeholder="Email *"
@@ -313,9 +412,11 @@ const ContactPage = () => {
                   required
                   fullWidth
                   size="small"
+                  disabled={loading}
                   sx={inputStyle}
                 />
 
+                {/* ADDRESS */}
                 <TextField
                   name="address"
                   placeholder="Address, City, Zip Code"
@@ -323,10 +424,12 @@ const ContactPage = () => {
                   onChange={handleChange}
                   fullWidth
                   size="small"
+                  disabled={loading}
                   sx={inputStyle}
                 />
               </Box>
 
+              {/* MESSAGE */}
               <TextField
                 name="message"
                 placeholder="Message *"
@@ -336,12 +439,14 @@ const ContactPage = () => {
                 fullWidth
                 multiline
                 rows={5}
+                disabled={loading}
                 sx={{
                   ...inputStyle,
                   mt: 2,
                 }}
               />
 
+              {/* NEWSLETTER */}
               <FormControlLabel
                 sx={{
                   alignItems: "flex-start",
@@ -352,6 +457,7 @@ const ContactPage = () => {
                   <Checkbox
                     size="small"
                     checked={form.subscribe}
+                    disabled={loading}
                     onChange={(event) => {
                       setForm((prev) => ({
                         ...prev,
@@ -379,10 +485,41 @@ const ContactPage = () => {
                 }
               />
 
+              {/* HCAPTCHA */}
+              <Box
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  width: "100%",
+                  overflowX: "auto",
+                }}
+              >
+                <HCaptcha
+                  ref={captchaRef}
+                  sitekey={HCAPTCHA_SITE_KEY}
+                  reCaptchaCompat={false}
+                  onVerify={(token) => {
+                    setCaptchaToken(token);
+                    setStatus(null);
+                  }}
+                  onExpire={() => {
+                    setCaptchaToken(null);
+                  }}
+                  onError={() => {
+                    setCaptchaToken(null);
+                    setErrorMessage("CAPTCHA verification failed. Please try again.");
+                    setStatus("error");
+                  }}
+                />
+              </Box>
+
+              {/* SUBMIT BUTTON */}
               <Box sx={{ mt: 2 }}>
                 <Button
                   type="submit"
                   variant="contained"
+                  disabled={loading || !captchaToken}
+                  startIcon={loading ? <CircularProgress size={16} color="inherit" /> : undefined}
                   sx={{
                     backgroundColor: "#333",
                     color: "#fff",
@@ -393,13 +530,19 @@ const ContactPage = () => {
                     px: 3,
                     py: 1,
                     boxShadow: "none",
+
                     "&:hover": {
                       backgroundColor: "#c62828",
                       boxShadow: "none",
                     },
+
+                    "&.Mui-disabled": {
+                      backgroundColor: "#999",
+                      color: "#fff",
+                    },
                   }}
                 >
-                  Send message
+                  {loading ? "Sending..." : "Send message"}
                 </Button>
               </Box>
 
@@ -417,7 +560,7 @@ const ContactPage = () => {
         </Box>
       </Container>
 
-      {/* Google Maps */}
+      {/* GOOGLE MAPS */}
       <Box
         sx={{
           width: "100%",
