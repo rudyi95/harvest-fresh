@@ -20,7 +20,7 @@ const WeeklySpecialsPage = () => {
           component="img"
           alt="Thanksgiving image"
           src={weeklyImage}
-          sx={{ width: "100%", height: "auto" }}
+          sx={{ width: "100%", height: "auto", borderRadius: "20px" }}
         />
       </Container>
     </Box>
