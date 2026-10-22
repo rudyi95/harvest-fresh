@@ -317,13 +317,6 @@ const ShawarmaPage = () => {
 
   const handleAction = (product: Nullable<Product>) =>
     setSelectedProduct(!selectedProduct ? product : null);
-  // const handleOpen = (product: Product) => {
-  //   setSelectedProduct(product);
-  // };
-
-  // const handleClose = () => {
-  //   setSelectedProduct(null);
-  // };
 
   return (
     <Box
@@ -363,20 +356,7 @@ const ShawarmaPage = () => {
               mb: { xs: 7, md: 10 },
             }}
           >
-            <Typography
-              variant="h5"
-              align="center"
-              sx={{
-                fontWeight: 500,
-                mb: 4,
-                fontSize: {
-                  xs: 24,
-                  md: 28,
-                },
-              }}
-            >
-              {category.title}
-            </Typography>
+            <Typography variant="h2">{category.title}</Typography>
 
             <Box
               sx={{
@@ -464,28 +444,12 @@ const ShawarmaPage = () => {
               {/* Product Information */}
 
               <Box>
-                <Typography
-                  id="product-dialog-title"
-                  variant="h5"
-                  sx={{
-                    fontWeight: 500,
-                    mb: 3,
-                    pr: 3,
-                  }}
-                >
+                <Typography id="product-dialog-title" variant="h2">
                   {selectedProduct.name}
                 </Typography>
 
                 <Stack spacing={2}>
-                  <Typography
-                    sx={{
-                      fontSize: 14,
-                      color: "#777",
-                      lineHeight: 1.8,
-                    }}
-                  >
-                    {selectedProduct.description}
-                  </Typography>
+                  <Typography variant="body1">{selectedProduct.description}</Typography>
 
                   {selectedProduct?.orderUrl && (
                     <Button
@@ -500,7 +464,7 @@ const ShawarmaPage = () => {
                         px: 4,
                         py: 1.5,
                         backgroundColor: "#874747",
-                        color: "#fff",
+                        color: "#fff !important",
                         fontSize: 14,
                         fontWeight: 600,
                         textTransform: "none",

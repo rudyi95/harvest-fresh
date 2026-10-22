@@ -40,41 +40,15 @@ const WeeklySpecialsPage = () => {
         }}
       >
         <Box sx={{ textAlign: "center", mb: 6 }}>
-          <Typography
-            component="h1"
-            sx={{
-              fontSize: { xs: 28, md: 36 },
-              fontWeight: 500,
-              mb: 2,
-              color: "#222",
-            }}
-          >
-            Holiday Menu
-          </Typography>
+          <Typography variant="h2">Holiday Menu</Typography>
 
-          <Typography
-            sx={{
-              fontSize: { xs: 14, md: 17 },
-              color: "#666",
-              maxWidth: 800,
-              mx: "auto",
-              lineHeight: 1.8,
-            }}
-          >
+          <Typography variant="body1">
             Your favorites, featured fresh. Every week brings a new lineup of standout picks and
             limited-time savings handpicked to offer more taste, more variety, and more reasons to
             swing by.
           </Typography>
 
-          <Typography
-            sx={{
-              fontSize: 17,
-              color: "#555",
-              mt: 4,
-            }}
-          >
-            Made Fresh, Right Here
-          </Typography>
+          <Typography variant="body1">Made Fresh, Right Here</Typography>
         </Box>
 
         <Grid container spacing={{ xs: 3, md: 4 }}>

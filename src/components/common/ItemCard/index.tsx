@@ -104,15 +104,7 @@ export const ItemCard = ({ product, handleAction }: IItemCard) => {
             pb: 2,
           }}
         >
-          <Typography
-            sx={{
-              fontSize: 16,
-              fontWeight: 500,
-              mb: 1,
-            }}
-          >
-            {product.name}
-          </Typography>
+          <Typography variant="body1">{product.name}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>

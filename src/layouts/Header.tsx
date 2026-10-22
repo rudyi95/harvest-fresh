@@ -103,8 +103,8 @@ const pages = [
   { label: "Home", path: "/" },
   { label: "About Us", path: "/about" },
   // { label: "Departments", path: "/departments" },
-  { label: "Holiday Menu", path: "/weekly-specials" },
-  { label: "Shawarma", path: "/shawarma" },
+  { label: "Holiday Menu", path: "/holiday-menu" },
+  { label: "Online Order", path: "/order-online" },
   // { label: "Catering", path: "/catering" },
   { label: "Contact Us", path: "/contacts" },
 ];
@@ -230,7 +230,7 @@ const Header = () => {
                       },
                     }}
                   >
-                    {page.label}
+                    <Typography variant="body1">{page.label}</Typography>
                   </Button>
                 );
               })}

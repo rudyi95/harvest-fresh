@@ -9,18 +9,11 @@ const CBreadcrumbs = ({ page }: ICBreadcrumbs) => {
   return (
     <Container maxWidth="lg">
       <Breadcrumbs separator="›">
-        <Link component={RouterLink} to="/" underline="hover" color="inherit" sx={{ fontSize: 14 }}>
-          Home
+        <Link component={RouterLink} to="/" underline="hover">
+          <Typography variant="body1">Home</Typography>
         </Link>
 
-        <Typography
-          sx={{
-            fontSize: 14,
-            color: "#999",
-          }}
-        >
-          {page}
-        </Typography>
+        <Typography variant="body1">{page}</Typography>
       </Breadcrumbs>
     </Container>
   );

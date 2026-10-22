@@ -66,44 +66,44 @@ export const CategoryNavigation = ({ categories }: CategoryNavigationProps) => {
         zIndex: 100,
         top: {
           xs: "auto",
-        //   lg: "50%",
+          //   lg: "50%",
         },
         bottom: {
           xs: 16,
-        //   lg: "auto",
+          //   lg: "auto",
         },
         left: {
           xs: "50%",
-        //   lg: 20,
+          //   lg: 20,
         },
         transform: {
           xs: "translateX(-50%)",
-        //   lg: "translateY(-50%)",
+          //   lg: "translateY(-50%)",
         },
         display: "flex",
         flexDirection: {
           xs: "row",
-        //   lg: "column",
+          //   lg: "column",
         },
         alignItems: {
           xs: "center",
-        //   lg: "flex-start",
+          //   lg: "flex-start",
         },
         gap: {
           xs: 1.5,
-        //   lg: 2,
+          //   lg: 2,
         },
         maxWidth: {
           xs: "calc(100vw - 32px)",
-        //   lg: 180,
+          //   lg: 180,
         },
         overflowX: {
           xs: "auto",
-        //   lg: "visible",
+          //   lg: "visible",
         },
         p: {
           xs: 1.5,
-        //   lg: 2,
+          //   lg: 2,
         },
         borderRadius: 2,
         backgroundColor: "rgba(255,255,255,0.88)",

@@ -55,19 +55,8 @@ export const OrderButton = () => {
         }}
       />
 
-      <Typography
-        sx={{
-          fontSize: {
-            xs: 12,
-            md: 15,
-          },
-          fontWeight: 700,
-          lineHeight: 1.2,
-        }}
-      >
-        Make an
-        <br />
-        Order
+      <Typography variant="body1" sx={{ color: "#FFF", lineHeight: 1 }}>
+        Make an Order
       </Typography>
     </Box>
   );

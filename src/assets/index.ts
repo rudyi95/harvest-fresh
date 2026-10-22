@@ -18,7 +18,7 @@ import shawarmaVeggie from "./products/shawarma/shawarmaVeggie.jpeg";
 
 import amishEggs from "./products/dairy/amishEggs.png";
 
-import { storeInside, vadik_ph } from "./aboutUs";
+import { storeInside, vadik_ph, about2 } from "./aboutUs";
 
 import cocaCola from "./products/beverage/cocaCola.jpeg";
 import cocaColaZero from "./products/beverage/cocaColaZero.jpeg";
@@ -73,4 +73,5 @@ export {
   icedLatte,
   macchiato,
   mocha,
+  about2,
 };
