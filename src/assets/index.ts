@@ -2,6 +2,7 @@ import xo_logo from "./xo_logo.png";
 import hero_bg from "./hero_bg.jpg";
 import about from "./about.png";
 import chefSlicingShawarma from "./chefSlicingShawarma.png";
+import weeklyImage from "./weeklyImage.jpeg";
 
 import deli from "./popular/deli.jpg";
 import bakery from "./popular/bakery.jpg";
@@ -15,8 +16,6 @@ import shawarmaChicken from "./products/shawarma/shawarmaChicken.jpeg";
 import shawarmaHawaiian from "./products/shawarma/shawarmaHawaiian.jpeg";
 import shawarmaMix from "./products/shawarma/shawarmaMix.jpeg";
 import shawarmaVeggie from "./products/shawarma/shawarmaVeggie.jpeg";
-
-import amishEggs from "./products/dairy/amishEggs.png";
 
 import { storeInside, vadik_ph, about2 } from "./aboutUs";
 
@@ -54,7 +53,6 @@ export {
   shawarmaHawaiian,
   shawarmaMix,
   shawarmaVeggie,
-  amishEggs,
   storeInside,
   vadik_ph,
   cocaCola,
@@ -74,4 +72,5 @@ export {
   macchiato,
   mocha,
   about2,
+  weeklyImage,
 };
