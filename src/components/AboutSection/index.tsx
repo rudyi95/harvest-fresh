@@ -3,11 +3,12 @@ import type React from "react";
 import { Box, Container, Typography, Stack } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
-import { about } from "../../assets";
+// import { about } from "../../assets";
 import { aboutSection } from "src/utils/constants/text/home";
-import { CustomPicture } from "../common/CustomPicture";
+// import { CustomPicture } from "../common/CustomPicture";
 
 import { containerInner, leftBlock, listItem, listItemIcon, root } from "./style";
+import CustomVideo from "../common/CustomVideo";
 
 const AboutSection: React.FC = () => {
   return (
@@ -29,7 +30,12 @@ const AboutSection: React.FC = () => {
             </Stack>
           </Box>
 
-          <CustomPicture src={about} alt="XO Harvest Fresh Store" />
+          {/* <CustomPicture src={about} alt="XO Harvest Fresh Store" /> */}
+          <CustomVideo
+            src={`${import.meta.env.BASE_URL}videos/landing.mp4`}
+            height="600px"
+            borderRadius={20}
+          />
         </Box>
       </Container>
     </Box>
