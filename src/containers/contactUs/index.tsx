@@ -3,9 +3,7 @@ import React, { useRef, useState, type ChangeEvent, type FormEvent } from "react
 import {
   Alert,
   Box,
-  Button,
   Checkbox,
-  CircularProgress,
   Container,
   FormControlLabel,
   Link,
@@ -18,8 +16,12 @@ import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
 import MailOutlineIcon from "@mui/icons-material/MailOutlined";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 
+import { CustomButton } from "src/components/common/CustomButton";
+import { INITIAL_VALUES, TEXT_FIELDS } from "src/utils/constants/contactUs";
+
 import {
   body2,
+  contactForm,
   container,
   containerInner,
   inputForm,
@@ -28,15 +30,6 @@ import {
   root,
   subtitle2,
 } from "./styles";
-
-const initialValues = {
-  name: "",
-  phone: "",
-  email: "",
-  address: "",
-  message: "",
-  subscribe: false,
-};
 
 interface IContactUs {
   name: string;
@@ -50,7 +43,7 @@ interface IContactUs {
 type FormStatus = "success" | "error" | null;
 
 export const ContactUs: React.FC = () => {
-  const [form, setForm] = useState<IContactUs>(initialValues);
+  const [form, setForm] = useState<IContactUs>(INITIAL_VALUES);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<FormStatus>(null);
   const [errorMessage, setErrorMessage] = useState("");
@@ -128,7 +121,7 @@ export const ContactUs: React.FC = () => {
         throw new Error(result.message || "Failed to send your message.");
       }
 
-      setForm(initialValues);
+      setForm(INITIAL_VALUES);
       setStatus("success");
       resetCaptcha();
     } catch (error) {
@@ -262,7 +255,7 @@ export const ContactUs: React.FC = () => {
             )}
 
             {/* CONTACT FORM */}
-            <Box component="form" onSubmit={handleSubmit}>
+            <Box component="form" onSubmit={handleSubmit} sx={contactForm}>
               <Box
                 sx={{
                   display: "grid",
@@ -273,58 +266,17 @@ export const ContactUs: React.FC = () => {
                   gap: 2,
                 }}
               >
-                {/* NAME */}
-                <TextField
-                  name="name"
-                  placeholder="Name *"
-                  value={form.name}
-                  onChange={handleChange}
-                  required
-                  fullWidth
-                  size="small"
-                  disabled={loading}
-                  sx={inputForm}
-                />
 
-                {/* PHONE */}
-                <TextField
-                  name="phone"
-                  placeholder="Phone Number *"
-                  type="tel"
-                  value={form.phone}
-                  onChange={handleChange}
-                  required
-                  fullWidth
-                  size="small"
-                  disabled={loading}
-                  sx={inputForm}
-                />
-
-                {/* EMAIL */}
-                <TextField
-                  name="email"
-                  placeholder="Email *"
-                  type="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-                  fullWidth
-                  size="small"
-                  disabled={loading}
-                  sx={inputForm}
-                />
-
-                {/* ADDRESS */}
-                <TextField
-                  name="address"
-                  placeholder="Address, City, Zip Code"
-                  value={form.address}
-                  onChange={handleChange}
-                  fullWidth
-                  size="small"
-                  disabled={loading}
-                  sx={inputForm}
-                />
+                {TEXT_FIELDS.map((props, index) => (
+                  <TextField
+                    key={index}
+                    {...props}
+                    value={form[props.name as keyof typeof form]}
+                    onChange={handleChange}
+                    disabled={loading}
+                    sx={inputForm}
+                  />
+                ))}
               </Box>
 
               {/* MESSAGE */}
@@ -340,20 +292,19 @@ export const ContactUs: React.FC = () => {
                 disabled={loading}
                 sx={{
                   ...inputForm,
-                  mt: 2,
                 }}
               />
 
               {/* NEWSLETTER */}
               <FormControlLabel
                 sx={{
-                  alignItems: "flex-start",
-                  mt: 1,
-                  mr: 0,
+                  alignItems: "center",
+                  gap: "20px",
+                  m: 0,
                 }}
                 control={
                   <Checkbox
-                    size="small"
+                    size="large"
                     checked={form.subscribe}
                     disabled={loading}
                     onChange={(event) => {
@@ -362,10 +313,7 @@ export const ContactUs: React.FC = () => {
                         subscribe: event.target.checked,
                       }));
                     }}
-                    sx={{
-                      p: 0.5,
-                      mr: 0.5,
-                    }}
+                    sx={{ p: 0 }}
                   />
                 }
                 label={
@@ -380,8 +328,6 @@ export const ContactUs: React.FC = () => {
               {/* HCAPTCHA */}
               <Box
                 sx={{
-                  mt: 3,
-                  mb: 2,
                   width: "100%",
                   overflowX: "auto",
                 }}
@@ -406,47 +352,14 @@ export const ContactUs: React.FC = () => {
               </Box>
 
               {/* SUBMIT BUTTON */}
-              <Box sx={{ mt: 2 }}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  disabled={loading || !captchaToken}
-                  startIcon={loading ? <CircularProgress size={16} color="inherit" /> : undefined}
-                  sx={{
-                    backgroundColor: "#333",
-                    color: "#fff",
-                    borderRadius: "30px",
-                    textTransform: "none",
-                    fontSize: 13,
-                    fontWeight: 500,
-                    px: 3,
-                    py: 1,
-                    boxShadow: "none",
+              <CustomButton
+                disabled={loading || !captchaToken}
+                loading={loading}
+                trueText="Sending..."
+                falseText="Send message"
+              />
 
-                    "&:hover": {
-                      backgroundColor: "#c62828",
-                      boxShadow: "none",
-                    },
-
-                    "&.Mui-disabled": {
-                      backgroundColor: "#999",
-                      color: "#fff",
-                    },
-                  }}
-                >
-                  {loading ? "Sending..." : "Send message"}
-                </Button>
-              </Box>
-
-              <Typography
-                sx={{
-                  fontSize: 12,
-                  color: "#777",
-                  mt: 1.5,
-                }}
-              >
-                * These fields are required.
-              </Typography>
+              <Typography variant="body2">* These fields are required.</Typography>
             </Box>
           </Box>
         </Box>

@@ -48,6 +48,12 @@ export const body2: SxProps<Theme> = {
   lineHeight: 1.7,
 };
 
+export const contactForm: SxProps<Theme> = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "20px",
+};
+
 export const inputForm: SxProps<Theme> = {
   "& .MuiOutlinedInput-root": {
     borderRadius: "5px",
