@@ -20,6 +20,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
+import { PAGES } from "src/utils/constants/common";
+
 import { xo_logo } from "../assets";
 
 const departmentColumns = [
@@ -99,16 +101,6 @@ const departmentColumns = [
   ],
 ];
 
-const pages = [
-  { label: "Home", path: "/" },
-  { label: "About Us", path: "/about" },
-  // { label: "Departments", path: "/departments" },
-  { label: "Holiday Menu", path: "/holiday-menu" },
-  { label: "Online Order", path: "/order-online" },
-  // { label: "Catering", path: "/catering" },
-  { label: "Contact Us", path: "/contacts" },
-];
-
 const Header = () => {
   const [departmentsOpen, setDepartmentsOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -142,7 +134,7 @@ const Header = () => {
           setCateringAnchor(null);
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
           <Toolbar
             disableGutters
             sx={{
@@ -174,66 +166,68 @@ const Header = () => {
               />
             </Box>
 
-            <Box
-              component="nav"
-              sx={{
-                display: { xs: "none", md: "flex" },
-                alignItems: "center",
-                justifyContent: "center",
-                flexGrow: 1,
-                gap: { md: 0.5, lg: 1.5 },
-              }}
-            >
-              {pages.map((page) => {
-                const isDepartments = page.label === "Departments";
-                const isCatering = page.label === "Catering";
-                const hasDropdown = isDepartments || isCatering;
+            <Box>
+              <Box
+                component="nav"
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexGrow: 1,
+                  gap: { md: 0.5, lg: 1.5 },
+                }}
+              >
+                {PAGES.map((page) => {
+                  const isDepartments = page.label === "Departments";
+                  const isCatering = page.label === "Catering";
+                  const hasDropdown = isDepartments || isCatering;
 
-                return (
-                  <Button
-                    key={page.label}
-                    component={isDepartments || isCatering ? "button" : RouterLink}
-                    to={hasDropdown ? undefined : page.path}
-                    onMouseEnter={(event: MouseEvent<HTMLElement>) => {
-                      if (isDepartments) {
-                        setDepartmentsOpen(true);
-                        setCateringAnchor(null);
-                      } else if (isCatering) {
-                        handleCateringClick(event);
-                      } else {
-                        setDepartmentsOpen(false);
-                        setCateringAnchor(null);
+                  return (
+                    <Button
+                      key={page.label}
+                      component={isDepartments || isCatering ? "button" : RouterLink}
+                      to={hasDropdown ? undefined : page.path}
+                      onMouseEnter={(event: MouseEvent<HTMLElement>) => {
+                        if (isDepartments) {
+                          setDepartmentsOpen(true);
+                          setCateringAnchor(null);
+                        } else if (isCatering) {
+                          handleCateringClick(event);
+                        } else {
+                          setDepartmentsOpen(false);
+                          setCateringAnchor(null);
+                        }
+                      }}
+                      onClick={(event: MouseEvent<HTMLElement>) => {
+                        if (isDepartments) {
+                          setDepartmentsOpen((previous) => !previous);
+                        } else if (isCatering) {
+                          handleCateringClick(event);
+                        } else {
+                          closeMenus();
+                        }
+                      }}
+                      endIcon={
+                        hasDropdown ? <KeyboardArrowDownIcon sx={{ fontSize: 17 }} /> : undefined
                       }
-                    }}
-                    onClick={(event: MouseEvent<HTMLElement>) => {
-                      if (isDepartments) {
-                        setDepartmentsOpen((previous) => !previous);
-                      } else if (isCatering) {
-                        handleCateringClick(event);
-                      } else {
-                        closeMenus();
-                      }
-                    }}
-                    endIcon={
-                      hasDropdown ? <KeyboardArrowDownIcon sx={{ fontSize: 17 }} /> : undefined
-                    }
-                    sx={{
-                      color: isDepartments && departmentsOpen ? "#874747" : "#222",
-                      textTransform: "none",
-                      fontSize: { md: 12, lg: 14 },
-                      fontWeight: 500,
-                      whiteSpace: "nowrap",
-                      px: { md: 1, lg: 1.5 },
-                      "&:hover": {
-                        backgroundColor: "transparent",
-                        color: "#874747",
-                      },
-                    }}
-                  >
-                    <Typography variant="body1">{page.label}</Typography>
-                  </Button>
-                );
-              })}
+                      sx={{
+                        color: isDepartments && departmentsOpen ? "#874747" : "#222",
+                        textTransform: "none",
+                        fontSize: { md: 12, lg: 14 },
+                        fontWeight: 500,
+                        whiteSpace: "nowrap",
+                        px: { md: 1, lg: 1.5 },
+                        "&:hover": {
+                          backgroundColor: "transparent",
+                          color: "#874747",
+                        },
+                      }}
+                    >
+                      <Typography variant="body1">{page.label}</Typography>
+                    </Button>
+                  );
+                })}
+              </Box>
             </Box>
 
             <IconButton
@@ -384,7 +378,7 @@ const Header = () => {
 
         <Divider sx={{ mb: 2 }} />
 
-        {pages.map((page) => {
+        {PAGES.map((page) => {
           const isDepartments = page.label === "Departments";
 
           return (

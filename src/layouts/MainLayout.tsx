@@ -9,7 +9,6 @@ const MainLayout = () => {
   return (
     <Box>
       <Header />
-
       <Box component="main">
         <Outlet />
       </Box>
