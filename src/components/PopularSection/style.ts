@@ -67,8 +67,7 @@ export const overlayText: SxProps<Theme> = {
 export const gridBlock: SxProps<Theme> = {
   display: "grid",
   gridTemplateColumns: {
-    xs: "1fr",
-    sm: "repeat(2, 1fr)",
+    xs: "repeat(2, 1fr)",
     md: "repeat(3, 1fr)",
   },
   columnGap: 3,
