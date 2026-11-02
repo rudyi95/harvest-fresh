@@ -21,11 +21,15 @@ import { INITIAL_VALUES, TEXT_FIELDS } from "src/utils/constants/contactUs";
 
 import {
   body2,
+  captchaContainer,
+  contactDetails,
   contactForm,
   container,
   containerInner,
+  formFieldsGrid,
   inputForm,
   leftColumn,
+  newsletter,
   rightColumn,
   root,
   subtitle2,
@@ -154,13 +158,7 @@ export const ContactUs: React.FC = () => {
 
             <Stack spacing={3}>
               {/* ADDRESS */}
-              <Stack
-                direction="row"
-                spacing={1.5}
-                sx={{
-                  alignItems: "flex-start",
-                }}
-              >
+              <Box sx={contactDetails}>
                 <LocationOnOutlinedIcon
                   sx={{
                     fontSize: 22,
@@ -180,16 +178,10 @@ export const ContactUs: React.FC = () => {
                     Arlington Heights, IL 60004
                   </Typography>
                 </Box>
-              </Stack>
+              </Box>
 
               {/* PHONE */}
-              <Stack
-                direction="row"
-                spacing={1.5}
-                sx={{
-                  alignItems: "flex-start",
-                }}
-              >
+              <Box sx={contactDetails}>
                 <PhoneOutlinedIcon
                   sx={{
                     fontSize: 22,
@@ -206,16 +198,10 @@ export const ContactUs: React.FC = () => {
                     (847) 229-1010
                   </Link>
                 </Box>
-              </Stack>
+              </Box>
 
               {/* EMAIL */}
-              <Stack
-                direction="row"
-                spacing={1.5}
-                sx={{
-                  alignItems: "flex-start",
-                }}
-              >
+              <Box sx={contactDetails}>
                 <MailOutlineIcon
                   sx={{
                     fontSize: 22,
@@ -232,7 +218,7 @@ export const ContactUs: React.FC = () => {
                     harvestfresh24@gmail.com
                   </Link>
                 </Box>
-              </Stack>
+              </Box>
             </Stack>
           </Box>
 
@@ -256,24 +242,15 @@ export const ContactUs: React.FC = () => {
 
             {/* CONTACT FORM */}
             <Box component="form" onSubmit={handleSubmit} sx={contactForm}>
-              <Box
-                sx={{
-                  display: "grid",
-                  gridTemplateColumns: {
-                    xs: "1fr",
-                    sm: "1fr 1fr",
-                  },
-                  gap: 2,
-                }}
-              >
-
-                {TEXT_FIELDS.map((props, index) => (
+              <Box sx={formFieldsGrid}>
+                {TEXT_FIELDS.map((props) => (
                   <TextField
-                    key={index}
+                    key={props.name}
                     {...props}
                     value={form[props.name as keyof typeof form]}
                     onChange={handleChange}
                     disabled={loading}
+                    fullWidth
                     sx={inputForm}
                   />
                 ))}
@@ -290,18 +267,13 @@ export const ContactUs: React.FC = () => {
                 multiline
                 rows={5}
                 disabled={loading}
-                sx={{
-                  ...inputForm,
-                }}
+                sx={inputForm}
               />
 
               {/* NEWSLETTER */}
+
               <FormControlLabel
-                sx={{
-                  alignItems: "center",
-                  gap: "20px",
-                  m: 0,
-                }}
+                sx={newsletter}
                 control={
                   <Checkbox
                     size="large"
@@ -313,7 +285,6 @@ export const ContactUs: React.FC = () => {
                         subscribe: event.target.checked,
                       }));
                     }}
-                    sx={{ p: 0 }}
                   />
                 }
                 label={
@@ -326,12 +297,7 @@ export const ContactUs: React.FC = () => {
               />
 
               {/* HCAPTCHA */}
-              <Box
-                sx={{
-                  width: "100%",
-                  overflowX: "auto",
-                }}
-              >
+              <Box sx={captchaContainer}>
                 <HCaptcha
                   ref={captchaRef}
                   sitekey={import.meta.env.VITE_HCAPTCHA_SITE_KEY}

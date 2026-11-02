@@ -9,6 +9,7 @@ import ContactPage from "./pages/ContactPage";
 import WeeklySpecialsPage from "./pages/WeeklySpecialsPage";
 import NotFound from "src/pages/NotFound";
 import ServerError from "src/pages/ServerError";
+import AdminPage from "./pages/AdminPage";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/holiday-menu" element={<WeeklySpecialsPage />} />
         <Route path="/order-online" element={<ShawarmaPage />} />
         <Route path="/contacts" element={<ContactPage />} />
+        <Route path="/admin" element={<AdminPage />} />
         <Route path="/500" element={<ServerError />} />
         <Route path="*" element={<NotFound />} />
       </Route>

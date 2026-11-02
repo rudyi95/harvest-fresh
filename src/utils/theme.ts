@@ -3,6 +3,20 @@ import { createTheme, type ThemeOptions } from "@mui/material/styles";
 const baseTheme = createTheme();
 
 const themeOptions: ThemeOptions = {
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          margin: 0,
+          padding: 0,
+        },
+        main: {
+          margin: 0,
+          padding: 0,
+        },
+      },
+    },
+  },
   typography: {
     fontFamily: '"DM Sans", sans-serif',
 
